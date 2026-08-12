@@ -98,6 +98,90 @@ users = pd.DataFrame(
     }
 )
 
+# Prepare an empty array for each user's experiment assignment.
+variants = np.empty(N_USERS, dtype=object)
+
+# Identify the row positions belonging to mobile users.
+mobile_indices = np.flatnonzero(device_types == "mobile")
+
+# Shuffle mobile-user positions before splitting them evenly between variants.
+rng.shuffle(mobile_indices)
+
+mobile_split = len(mobile_indices) // 2
+variants[mobile_indices[:mobile_split]] = "control"
+variants[mobile_indices[mobile_split:]] = "treatment"
+
+# Identify and randomly split desktop users evenly between variants.
+desktop_indices = np.flatnonzero(device_types == "desktop")
+rng.shuffle(desktop_indices)
+
+desktop_split = len(desktop_indices) // 2
+variants[desktop_indices[:desktop_split]] = "control"
+variants[desktop_indices[desktop_split:]] = "treatment"
+
+# Generate an assignment timestamp within the 14-day experiment window.
+experiment_duration_seconds = int(
+    (EXPERIMENT_END + pd.Timedelta(days=1) - EXPERIMENT_START).total_seconds()
+)
+
+assignment_offsets = rng.integers(
+    0,
+    experiment_duration_seconds,
+    size=N_USERS,
+)
+
+assignment_timestamps = EXPERIMENT_START + pd.to_timedelta(
+    assignment_offsets,
+    unit="s",
+)
+
+# Build the experiment assignment table.
+experiment_assignments = pd.DataFrame(
+    {
+        "user_id": user_ids,
+        "variant": variants,
+        "assignment_timestamp": assignment_timestamps,
+    }
+)
+
+# Inspect the experiment assignment table before writing it to disk.
+print()
+print(experiment_assignments.head())
+
+print()
+print("Experiment assignments shape:", experiment_assignments.shape)
+
+# Check that assignment is exactly 50/50 within each device stratum.
+assignment_by_device = pd.crosstab(
+    users["device_type"],
+    experiment_assignments["variant"],
+)
+
+print()
+print("Assignments by device type:")
+print(assignment_by_device)
+
+# Validate assignment uniqueness and experiment-window boundaries.
+print()
+print(
+    "Unique assigned users:",
+    experiment_assignments["user_id"].nunique(),
+)
+print(
+    "Earliest assignment:",
+    experiment_assignments["assignment_timestamp"].min(),
+)
+print(
+    "Latest assignment:",
+    experiment_assignments["assignment_timestamp"].max(),
+)
+
+# Save the experiment assignment table.
+experiment_assignments.to_csv(
+    SYNTHETIC_DATA_DIR / "experiment_assignments.csv",
+    index=False,
+)
+
 # Inspect the generated users table before writing it to disk.
 print(users.head())
 print()
