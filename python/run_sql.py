@@ -37,12 +37,29 @@ with sqlite3.connect(DATABASE_PATH) as connection:
     for number, statement in enumerate(statements, start=1):
         print()
         print("=" * 70)
-        print(f"Query {number}")
+        print(f"Statement {number}")
         print("=" * 70)
 
         try:
-            result = pd.read_sql_query(statement, connection)
-            print(result.to_string(index=False))
+            cursor = connection.execute(statement)
+
+            # SELECT-style statements return columns and rows.
+            if cursor.description:
+                columns = [
+                    description[0]
+                    for description in cursor.description
+                ]
+
+                result = pd.DataFrame(
+                    cursor.fetchall(),
+                    columns=columns,
+                )
+
+                print(result.to_string(index=False))
+
+            # CREATE VIEW, DROP VIEW and similar statements do not return rows.
+            else:
+                print("Statement executed successfully.")
 
         except Exception as error:
             print(f"ERROR: {error}")
