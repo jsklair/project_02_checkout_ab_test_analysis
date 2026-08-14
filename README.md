@@ -12,6 +12,10 @@ The business question is whether a streamlined checkout should be rolled out bas
 
 The project uses **SQL and Python** to validate the experiment data, build an analysis-ready dataset, calculate product metrics and apply inferential statistics to support a rollout decision.
 
+## Live project
+
+[View the published analysis on GitHub Pages](https://jsklair.github.io/project_02_checkout_ab_test_analysis/)
+
 ## Key result
 
 The redesigned checkout increased conversion from **59.90% to 61.32%**.
@@ -108,6 +112,9 @@ The treatment effect was also positive across both desktop and mobile users.
 ```text
 data/
   synthetic/       Synthetic source CSV files
+docs/
+  assets/          Images used by the GitHub Pages site
+  index.md         Published project landing page
 python/
   generate_synthetic_data.py
   build_database.py
@@ -194,6 +201,7 @@ python python\create_visualisations.py
 - SQLite
 - Git
 - GitHub
+- GitHub Pages
 
 ## Further detail
 
@@ -203,6 +211,6 @@ The underlying experiment design and synthetic-data assumptions are documented i
 
 ## Project status
 
-**Analysis complete. Final review pending.**
+**Complete.**
 
 The dataset is synthetic and is intended to demonstrate a realistic product-analytics and experimentation workflow rather than represent results from a real company.
