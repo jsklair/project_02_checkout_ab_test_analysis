@@ -1,4 +1,6 @@
-# Project 02 Plan
+# Project 02 Initial Plan
+
+> This document records the initial project design. Final experiment settings, realised results and the rollout recommendation are documented in the [synthetic data specification](reports/synthetic_data_specification.md) and [experiment results](reports/experiment_results.md).
 
 ## Project
 

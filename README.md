@@ -2,15 +2,9 @@
 
 ## Overview
 
-This project evaluates a synthetic A/B test of a redesigned e-commerce checkout.
+This is a synthetic A/B test built around a straightforward product decision: should a redesigned checkout replace the existing one?
 
-The business question is whether a streamlined checkout should be rolled out based on its impact on:
-
-- checkout conversion
-- revenue per checkout user
-- technical payment-error risk
-
-The project uses **SQL and Python** to validate the experiment data, build an analysis-ready dataset, calculate product metrics and apply inferential statistics to support a rollout decision.
+I used SQL to validate and reshape the experiment data, then Python to run the statistical analysis and create the visualisations. The decision is based on checkout conversion, revenue per checkout user and technical payment-error rate.
 
 ## Live project
 
@@ -35,20 +29,9 @@ The technical payment-error rate increased by **0.22 percentage points**, but re
 
 ## Analysis approach
 
-The project covers:
+I first validated the experiment setup and raw event data in SQL, including allocation checks, duplicate handling and experiment-window filtering. I then built a one-row-per-user analysis view for the main experiment metrics.
 
-1. experiment design and metric definition
-2. synthetic relational data generation
-3. data-quality validation in SQL
-4. duplicate and experiment-window handling
-5. creation of a one-row-per-user analysis dataset
-6. experiment KPI calculation
-7. sample ratio mismatch testing
-8. two-sample conversion testing and confidence intervals
-9. revenue analysis
-10. technical payment-error guardrail analysis
-11. device subgroup analysis
-12. business recommendation
+Python was used for the statistical testing: sample ratio mismatch, conversion uplift, revenue per checkout user, the technical payment-error guardrail and the pre-planned device comparison. The final step was to bring those results together into a rollout recommendation.
 
 ## Dataset
 
@@ -63,7 +46,7 @@ The synthetic dataset contains four related tables:
 
 The experiment contains **80,000 users**, split equally between control and treatment.
 
-Deliberate data-quality issues were included so that the project demonstrates realistic validation and cleaning rather than starting with analysis-ready data.
+I deliberately included a few data-quality problems so the analysis would have to deal with the kinds of issues that turn up in real event data rather than starting from a perfectly clean dataset.
 
 These include:
 
