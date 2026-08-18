@@ -2,9 +2,9 @@
 
 ## Evaluating an A/B test of a streamlined online checkout
 
-This project analyses a synthetic A/B experiment to determine whether a redesigned e-commerce checkout should be rolled out.
+This analysis asks whether a streamlined checkout should replace the existing version. The experiment is synthetic, but it is structured around the same decision an analyst would face in a live product test.
 
-The analysis combines **SQL and Python** to validate the experiment data, build user-level metrics, test the treatment effect and translate the results into a product recommendation.
+SQL is used to validate the experiment data and build the user-level metrics; Python handles the statistical testing and visualisations.
 
 ---
 
@@ -174,20 +174,9 @@ A sample-ratio-mismatch check also found no evidence of an assignment problem.
 
 ## Analysis workflow
 
-The project demonstrates an end-to-end experimentation workflow:
+The raw tables were first checked in SQL for allocation problems, duplicates, out-of-period activity and broken relationships between users, events and orders. After cleaning, I created a user-level analysis view containing the experiment assignment, conversion outcome, order value and payment-error indicators needed for the test.
 
-1. define the business question and experiment metrics
-2. generate a realistic synthetic relational dataset
-3. validate data quality in SQL
-4. remove duplicates and out-of-period activity
-5. create one analysis row per randomised user
-6. calculate experiment KPIs in SQL
-7. test sample allocation
-8. estimate conversion uplift and confidence intervals
-9. analyse revenue per checkout user
-10. assess the technical-error guardrail
-11. examine pre-planned device subgroups
-12. produce a rollout recommendation
+I then used Python to run the allocation check and statistical comparisons, before bringing the conversion, revenue, guardrail and device results together into the rollout decision.
 
 ---
 
@@ -195,13 +184,9 @@ The project demonstrates an end-to-end experimentation workflow:
 
 ### Roll out the redesigned checkout
 
-The recommendation is based on three main findings:
+Conversion improved convincingly, and the revenue result moved in the same direction. The increase in technical payment errors was smaller than the pre-agreed investigation threshold, so it does not outweigh the commercial evidence in favour of rollout.
 
-1. **Conversion increased materially and statistically significantly.**
-2. **Revenue per checkout user also increased.**
-3. **The technical payment-error increase remained below the pre-agreed investigation threshold.**
-
-Technical payment errors should continue to be monitored following rollout because the observed treatment rate was directionally higher than control.
+I would still monitor the payment-error rate after release because treatment was directionally higher than control.
 
 ---
 
@@ -216,6 +201,7 @@ Technical payment errors should continue to be monitored following rollout becau
 - SQLite
 - Git
 - GitHub
+- GitHub Pages
 
 ---
 

@@ -176,11 +176,11 @@ Control and treatment should use the same underlying order-value distribution.
 
 Target average order value:
 
-Approximately £75.
+Approximately Â£75.
 
 The distribution should be right-skewed:
 
-- most orders roughly £40 to £100;
+- most orders roughly Â£40 to Â£100;
 - some larger orders;
 - a small number of substantially higher-value orders.
 
@@ -201,18 +201,18 @@ Users may recover after a failed payment attempt.
 Example decline recovery:
 
 checkout_started
-? payment_submitted
-? payment_declined
-? payment_submitted
-? purchase_completed
+-> payment_submitted
+-> payment_declined
+-> payment_submitted
+-> purchase_completed
 
 Example technical-error recovery:
 
 checkout_started
-? payment_submitted
-? technical_payment_error
-? payment_submitted
-? purchase_completed
+-> payment_submitted
+-> technical_payment_error
+-> payment_submitted
+-> purchase_completed
 
 A payment decline or technical error therefore does not automatically mean the user ultimately fails to convert.
 

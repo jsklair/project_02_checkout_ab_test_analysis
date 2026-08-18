@@ -8,7 +8,7 @@ The primary result was statistically significant. The estimated conversion uplif
 
 Revenue per checkout user also increased, from **£46.65 to £48.89**, an observed improvement of **£2.24 per checkout user**. The 95% confidence interval for this difference was **£1.41 to £3.06**.
 
-The redesigned checkout produced a small increase in technical payment errors, from **2.08% to 2.30% of payment submitters**. The estimated increase was **+0.22 percentage points**, with a 95% confidence interval from **-0.00pp to +0.44pp**. This remained below the pre-agreed **+0.5 percentage-point investigation threshold**.
+The redesigned checkout produced a small increase in technical payment errors, from **2.08% to 2.30% of payment submitters**. The estimated increase was **+0.22 percentage points**, with a 95% confidence interval from **-0.004pp to +0.438pp**. This remained below the pre-agreed **+0.5 percentage-point investigation threshold**.
 
 **Recommendation: roll out the redesigned checkout, while continuing to monitor technical payment-error rates after release.**
 
@@ -206,13 +206,9 @@ These subgroup results should not be interpreted as proof that the treatment eff
 
 **Roll out the redesigned checkout.**
 
-The decision is supported by three main findings:
+The conversion result is strong enough to support rollout, and the increase in revenue per checkout user points in the same direction. The technical payment-error increase remained below the pre-agreed investigation threshold, so it does not outweigh the evidence in favour of the redesign.
 
-1. Checkout conversion increased materially and statistically significantly.
-2. Revenue per checkout user increased alongside conversion.
-3. The technical payment-error guardrail remained below the pre-agreed investigation threshold.
-
-Following rollout, technical payment-error rates should continue to be monitored because the observed treatment rate was directionally higher than control, even though the estimated increase remained within the accepted guardrail.
+Technical payment-error rates should still be monitored after release because the treatment rate was directionally higher than control.
 
 ---
 
